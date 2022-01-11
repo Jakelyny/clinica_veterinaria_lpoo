@@ -2,7 +2,10 @@ package br.edu.ifsul.cc.lpoo.cv.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -14,7 +17,9 @@ import javax.persistence.Table;
 public class Especie implements Serializable{
     
     @Id
-    private String id;
+    @SequenceGenerator(name = "seq_especie", sequenceName = "seq_especie_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_especie", strategy = GenerationType.SEQUENCE)   
+    private Integer id;
     
     @Column(nullable = false)
     private String nome;
@@ -22,14 +27,14 @@ public class Especie implements Serializable{
     /**
      * @return the id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,6 +51,6 @@ public class Especie implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     
 }
