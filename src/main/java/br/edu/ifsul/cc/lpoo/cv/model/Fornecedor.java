@@ -1,9 +1,8 @@
 package br.edu.ifsul.cc.lpoo.cv.model;
 
-import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -12,9 +11,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_fornecedor")
-public class Fornecedor implements Serializable{
+@DiscriminatorValue("Fo")
+public class Fornecedor extends Pessoa{
     
-    @Id
+    @Column(nullable = false)
     private String cnpj;
     
     @Column(nullable = false)

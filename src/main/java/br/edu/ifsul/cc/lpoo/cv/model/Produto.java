@@ -40,7 +40,7 @@ public class Produto implements Serializable{
     
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TipoProduto status;
+    private TipoProduto tipoProduto;
 
     /**
      * @return the id
@@ -116,14 +116,14 @@ public class Produto implements Serializable{
      * @return the status
      */
     public TipoProduto getStatus() {
-        return status;
+        return tipoProduto;
     }
 
     /**
-     * @param status the status to set
+     * @param tipoProduto the status to set
      */
-    public void setStatus(TipoProduto status) {
-        this.status = status;
+    public void setStatus(TipoProduto tipoProduto) {
+        this.tipoProduto = tipoProduto;
     }
 
 }
