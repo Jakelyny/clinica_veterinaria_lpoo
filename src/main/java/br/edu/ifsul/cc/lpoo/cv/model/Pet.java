@@ -1,5 +1,4 @@
 package br.edu.ifsul.cc.lpoo.cv.model;
-
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
@@ -31,6 +30,10 @@ public class Pet implements Serializable{
     
     @Column(nullable = false)
     private String observacao;
+    
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
     
     @ManyToOne
     @JoinColumn(name = "raca_id")
@@ -93,6 +96,20 @@ public class Pet implements Serializable{
     }
 
     /**
+     * @return the cliente
+     */
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
      * @return the raca
      */
     public Raca getRaca() {
@@ -105,6 +122,5 @@ public class Pet implements Serializable{
     public void setRaca(Raca raca) {
         this.raca = raca;
     }
-    
     
 }
