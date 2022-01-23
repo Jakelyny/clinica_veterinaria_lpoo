@@ -38,6 +38,10 @@ public class Pet implements Serializable{
     @ManyToOne
     @JoinColumn(name = "raca_id")
     private Raca raca;
+    
+    public Pet() {
+        
+    }
 
     /**
      * @return the id

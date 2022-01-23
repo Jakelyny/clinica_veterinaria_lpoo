@@ -49,6 +49,10 @@ public class Pessoa implements Serializable{
     
     @Column(nullable = true)
     private String complemento;
+    
+    public Pessoa() {
+        
+    }
 
     /**
      * @return the cpf

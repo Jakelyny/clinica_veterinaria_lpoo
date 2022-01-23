@@ -62,6 +62,10 @@ public class Venda implements Serializable{
     @JoinTable(name = "tb_venda_produto", joinColumns = {@JoinColumn(name = "venda_id")}, //agregacao, vai gerar uma tabela associativa.
                                        inverseJoinColumns = {@JoinColumn(name = "produto_id")})
     private List<Produto> produtos;
+    
+    public Venda() {
+        
+    }
 
     /**
      * @return the id

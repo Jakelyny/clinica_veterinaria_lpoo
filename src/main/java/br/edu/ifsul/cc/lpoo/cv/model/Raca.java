@@ -3,9 +3,12 @@ package br.edu.ifsul.cc.lpoo.cv.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +20,9 @@ import javax.persistence.Table;
 public class Raca implements Serializable{
     
     @Id
-    private String id;
+    @SequenceGenerator(name = "seq_raca", sequenceName = "seq_raca_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_raca", strategy = GenerationType.SEQUENCE)   
+    private Integer id;
     
     @Column(nullable = false)
     private String nome;
@@ -25,18 +30,22 @@ public class Raca implements Serializable{
     @ManyToOne
     @JoinColumn(name = "especie_id")
     private Especie especie;
+    
+    public Raca() {
+        
+    }
 
     /**
      * @return the id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -41,6 +41,10 @@ public class Produto implements Serializable{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoProduto tipoProduto;
+    
+    public Produto() {
+        
+    }
 
     /**
      * @return the id

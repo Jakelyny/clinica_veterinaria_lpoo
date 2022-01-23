@@ -5,7 +5,6 @@
 package br.edu.ifsul.cc.lpoo.cv.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,6 +42,10 @@ public class Receita implements Serializable{
     @JoinTable(name = "tb_receita_produto", joinColumns = {@JoinColumn(name = "receita_id")}, //agregacao, vai gerar uma tabela associativa.
                                        inverseJoinColumns = {@JoinColumn(name = "produto_id")})
     private List<Produto> produtos;
+    
+    public Receita() {
+        
+    }
 
     /**
      * @return the id

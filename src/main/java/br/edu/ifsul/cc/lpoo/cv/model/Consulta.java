@@ -52,6 +52,10 @@ public class Consulta implements Serializable{
     
     @OneToMany(mappedBy = "consulta")
     private List<Receita> receitas;//agregacao por composicao.
+    
+    public Consulta() {
+        
+    }
 
     /**
      * @return the id

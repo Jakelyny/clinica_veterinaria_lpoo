@@ -29,7 +29,11 @@ public class Cliente extends Pessoa{
      
     @OneToMany(mappedBy = "cliente")
     private List<Pet> pets;
-
+    
+    public Cliente() {
+        
+    }
+    
     /**
      * @return the data_ultima_visita
      */

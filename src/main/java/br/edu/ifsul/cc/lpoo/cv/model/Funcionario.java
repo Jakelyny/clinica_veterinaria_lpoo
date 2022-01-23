@@ -25,6 +25,10 @@ public class Funcionario extends Pessoa{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Cargo cargo;
+    
+    public Funcionario() {
+        
+    }
 
     /**
      * @return the numero_ctps

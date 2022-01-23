@@ -17,6 +17,10 @@ public class Medico extends Pessoa{
     @Column(nullable = false)
     private String numero_crmv;
 
+    public Medico() {
+        
+    }
+    
     /**
      * @return the numero_crmv
      */
@@ -30,6 +34,5 @@ public class Medico extends Pessoa{
     public void setNumero_crmv(String numero_crmv) {
         this.numero_crmv = numero_crmv;
     }
-    
     
 }

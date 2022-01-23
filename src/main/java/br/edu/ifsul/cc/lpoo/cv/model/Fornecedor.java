@@ -19,6 +19,10 @@ public class Fornecedor extends Pessoa{
     
     @Column(nullable = false)
     private String ie;
+    
+    public Fornecedor() {
+        
+    }
 
     /**
      * @return the cnpj

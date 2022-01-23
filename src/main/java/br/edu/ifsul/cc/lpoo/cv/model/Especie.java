@@ -23,6 +23,10 @@ public class Especie implements Serializable{
     
     @Column(nullable = false)
     private String nome;
+    
+    public Especie() {
+        
+    }
 
     /**
      * @return the id

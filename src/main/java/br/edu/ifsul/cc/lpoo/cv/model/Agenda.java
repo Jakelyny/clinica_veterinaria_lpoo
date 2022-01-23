@@ -55,6 +55,10 @@ public class Agenda implements Serializable{
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
+    
+    public Agenda() {
+        
+    }
 
     /**
      * @return the id
@@ -153,6 +157,6 @@ public class Agenda implements Serializable{
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
-    
-    
+
+        
 }
