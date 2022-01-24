@@ -1,5 +1,6 @@
 package br.edu.ifsul.cc.lpoo.cv.test;
 import br.edu.ifsul.cc.lpoo.cv.model.dao.PersistenciaJPA;
+import java.util.List;
 import org.junit.Test;
 
 /**
@@ -20,6 +21,5 @@ public class TestPersistenciaJPA {
         }else{
             System.out.println("Nao abriu a conexao com o BD via JPA");
         }
-        
-    }   
+    }
 }

@@ -2,8 +2,11 @@ package br.edu.ifsul.cc.lpoo.cv.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -13,6 +16,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tb_pessoa")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo")
 public class Pessoa implements Serializable{
     
     @Id
