@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -101,6 +102,9 @@ public class PersistenciaJDBC implements InterfacePersistencia {
                 Medico m = new Medico();
                 m.setCpf(rs.getString("cpf"));
                 m.setNumero_crmv(rs.getString("numero_crmv"));
+                Calendar dm = Calendar.getInstance();
+                dm.setTimeInMillis(rs.getDate("data_cadastro_medico").getTime());
+                m.setData_cadastro(dm);
                                
                 ps.close();
                 
@@ -113,11 +117,107 @@ public class PersistenciaJDBC implements InterfacePersistencia {
 
     @Override
     public void persist(Object o) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        //descobrir a instancia do Object 
+         if (o instanceof Pessoa) {
+
+            Pessoa p = (Pessoa) o;
+
+            if (p.getCpf() == null) {
+                PreparedStatement ps = this.con.prepareStatement("insert into tb_pessoa "
+                        + "(cpf, , rg, nome, senha, numero_celular, email, data_cadastro, data_nascimento, cep, endereco, "
+                        + "complemento) values " + "(now(),?,?,?,?,?,?,?,?,?,?,?)");
+
+                ps.setString(1, p.getCpf());
+                ps.setString(2, p.getRg());
+                ps.setString(3, p.getNome());
+                ps.setString(4, p.getSenha());
+                ps.setString(5, p.getNumero_celular());
+                ps.setString(6, p.getEmail());
+                Date dc = new Date(System.currentTimeMillis());
+                dc.setTime(p.getData_cadastro().getTimeInMillis());
+                ps.setDate(7, (java.sql.Date) dc);
+                Date dn = new Date(System.currentTimeMillis());
+                dn.setTime(p.getData_nascimento().getTimeInMillis());
+                ps.setDate(8, (java.sql.Date) dn);
+                ps.setString(9, p.getCep());
+                ps.setString(10, p.getEndereco());
+                ps.setString(11, p.getComplemento());
+
+                System.out.println("Insert em Pessoa");               
+                ps.executeUpdate();
+            } else {
+                
+                PreparedStatement ps = this.con.prepareStatement("update tb_pessoa set "
+                        + "rg = ?, " + "nome = ?, " + "senha = ?, " + "numero_celular = ?, " + "email = ? "
+                        + "data_cadastro = ? " + "data_nascimento = ? " + "cep = ? " + "endereco = ? " + "complemento = ? "
+                        + "where cpf = ?");
+                
+                ps.setString(1, p.getCpf());
+                ps.setString(2, p.getRg());
+                ps.setString(3, p.getNome());
+                ps.setString(4, p.getSenha());
+                ps.setString(5, p.getNumero_celular());
+                ps.setString(6, p.getEmail());
+                Date dc = new Date(System.currentTimeMillis());
+                dc.setTime(p.getData_cadastro().getTimeInMillis());
+                ps.setDate(7, (java.sql.Date) dc);
+                Date dn = new Date(System.currentTimeMillis());
+                dn.setTime(p.getData_nascimento().getTimeInMillis());
+                ps.setDate(8, (java.sql.Date) dn);
+                ps.setString(9, p.getCep());
+                ps.setString(10, p.getEndereco());
+                ps.setString(11, p.getComplemento());
+                
+                System.out.println("Update em Pessoa");               
+                ps.execute();
+            }
+
+        } else if (o instanceof Medico) {
+            Medico m = (Medico) o;
+
+             if (m.getData_cadastro_medico() == null) {
+                PreparedStatement ps = this.con.prepareStatement("insert into tb_medico "
+                        + "(cpf, numero_crmv, data_cadastro_medico) values " + "(now(),?, ?, ?)");
+                ps.setString(1, m.getCpf());
+                ps.setString(2, m.getNumero_crmv());
+                System.out.println("Insert Medico");
+                
+                ps.executeUpdate();
+            } else {
+
+                PreparedStatement ps = this.con.prepareStatement("update tb_medico set "
+                        +  "cpf = ? " + "numero_crmv = ?, " + "where data_cadastro_medico = ?");
+                ps.setString(1, m.getCpf());
+                ps.setString(2, m.getNumero_crmv());
+                Date dc = null;
+                dc.setTime(m.getData_cadastro().getTimeInMillis());
+                ps.setDate(3, (java.sql.Date) dc);
+                System.out.println("Update Medico");
+
+                ps.execute();
+            }
+        }
     }
 
     @Override
     public void remover(Object o) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(o instanceof Pessoa){
+
+            Pessoa p = (Pessoa) o; //converter o para o e que é 
+            
+            PreparedStatement ps = this.con.prepareStatement("delete from tb_pessoa where cpf = ?");
+            ps.setString(1, p.getCpf());            
+            ps.execute();            
+            
+        }else if(o instanceof Medico){
+            
+            Medico m = (Medico) o; //converter o para o e que é    
+            
+            PreparedStatement ps = this.con.prepareStatement("delete from tb_medico where cpf = ?");
+            ps.setString(1, m.getCpf());            
+            ps.execute(); 
+        } 
     }
 }
