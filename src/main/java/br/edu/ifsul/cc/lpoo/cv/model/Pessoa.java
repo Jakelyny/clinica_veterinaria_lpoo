@@ -24,6 +24,9 @@ public class Pessoa implements Serializable{
     private String cpf;
     
     @Column(nullable = false)
+    private String tipo;
+    
+    @Column(nullable = false)
     private String rg;
     
     @Column(nullable = false)
@@ -32,7 +35,7 @@ public class Pessoa implements Serializable{
     @Column(nullable = false)
     private String senha;
     
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)
     private String numero_celular;
     
     @Column(nullable = false)
@@ -46,7 +49,7 @@ public class Pessoa implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_nascimento;
     
-    @Column(nullable = false, length = 8)
+    @Column(nullable = false)
     private String cep;
 
     @Column(nullable = false)
@@ -213,5 +216,12 @@ public class Pessoa implements Serializable{
         this.complemento = complemento;
     }
     
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
 }
