@@ -127,7 +127,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
             if (p.getData_cadastro() == null) {
                 PreparedStatement ps = this.con.prepareStatement("insert into tb_pessoa "
                         + "(data_cadastro, cpf, rg, nome, senha, numero_celular, email, data_nascimento, cep, endereco, "
-                        + "complemento) values " + "(now(),?,?,?,?,?,?,?,?,?,?)");
+                        + "complemento, tipo) values " + "(now(),?,?,?,?,?,?,?,?,?,?,?)");
 
                 ps.setString(1, p.getCpf());
                 ps.setString(2, p.getRg());
@@ -141,14 +141,15 @@ public class PersistenciaJDBC implements InterfacePersistencia {
                 ps.setString(8, p.getCep());
                 ps.setString(9, p.getEndereco());
                 ps.setString(10, p.getComplemento());
+                ps.setString(11, p.getTipo());
 
                 System.out.println("Insert em Pessoa");               
                 ps.executeUpdate();
             } else {
                 
                 PreparedStatement ps = this.con.prepareStatement("update tb_pessoa set "
-                        + "rg = ?, " + "nome = ?, " + "senha = ?, " + "numero_celular = ?, " + "email = ? "
-                        + "data_nascimento = ? " + "cep = ? " + "endereco = ? " + "complemento = ? "
+                        + "rg = ?, " + "nome = ?, " + "senha = ?, " + "numero_celular = ?, " + "email = ?, "
+                        + "data_nascimento = ?, " + "cep = ?, " + "endereco = ?, " + "complemento = ? "
                         + "where cpf = ?");
                 
                 ps.setString(1, p.getRg());
@@ -236,10 +237,10 @@ public class PersistenciaJDBC implements InterfacePersistencia {
             p.setSenha(rs.getString("senha"));
             p.setNumero_celular(rs.getString("numero_celular"));
             p.setEmail(rs.getString("email"));
-            Calendar dc = null;
+            Calendar dc = Calendar.getInstance();
             dc.setTimeInMillis(rs.getDate("data_cadastro").getTime());
             p.setData_cadastro(dc);
-            Calendar dn = null;
+            Calendar dn = Calendar.getInstance();
             dn.setTimeInMillis(rs.getDate("data_nascimento").getTime());
             p.setData_nascimento(dn);
             p.setCep(rs.getString("cep"));
