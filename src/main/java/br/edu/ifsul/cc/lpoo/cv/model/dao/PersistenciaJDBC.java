@@ -117,7 +117,31 @@ public class PersistenciaJDBC implements InterfacePersistencia {
     public void persist(Object o) throws Exception {
         
         //descobrir a instancia do Object 
-         if (o instanceof Pessoa) {
+        if (o instanceof Medico) {
+            Medico m = (Medico) o;
+
+             if (m.getData_cadastro_medico() == null) {
+                PreparedStatement ps = this.con.prepareStatement("insert into tb_medico "
+                        + "(data_cadastro_medico, cpf, numero_crmv) values " + "(now(),?,?)");
+                ps.setString(1, m.getCpf());
+                ps.setString(2, m.getNumero_crmv());
+                System.out.println("Insert Medico");
+                
+                ps.executeUpdate();
+            } else {
+
+                PreparedStatement ps = this.con.prepareStatement("update tb_medico set "
+                        +  "cpf = ? " + "numero_crmv = ? " + "where data_cadastro_medico = ?");
+                ps.setString(1, m.getCpf());
+                ps.setString(2, m.getNumero_crmv());
+                Date dn = new Date(System.currentTimeMillis());
+                dn.setTime(m.getData_cadastro_medico().getTimeInMillis());
+                ps.setDate(3, (java.sql.Date) dn);
+                System.out.println("Update Medico");
+                
+                ps.execute();
+            }
+        } else if (o instanceof Pessoa) {
 
             Pessoa p = (Pessoa) o;
 
@@ -167,37 +191,20 @@ public class PersistenciaJDBC implements InterfacePersistencia {
                 ps.execute();
             }
 
-        } else if (o instanceof Medico) {
-            Medico m = (Medico) o;
-
-             if (m.getData_cadastro_medico() == null) {
-                PreparedStatement ps = this.con.prepareStatement("insert into tb_medico "
-                        + "(data_cadastro_medico, cpf, numero_crmv) values " + "(now(),?,?)");
-                ps.setString(1, m.getCpf());
-                ps.setString(2, m.getNumero_crmv());
-                System.out.println("Insert Medico");
-                
-                ps.executeUpdate();
-            } else {
-
-                PreparedStatement ps = this.con.prepareStatement("update tb_medico set "
-                        +  "cpf = ? " + "numero_crmv = ?, " + "where data_cadastro_medico = ?");
-                ps.setString(1, m.getCpf());
-                ps.setString(2, m.getNumero_crmv());
-                Date dn = new Date(System.currentTimeMillis());
-                dn.setTime(m.getData_cadastro_medico().getTimeInMillis());
-                ps.setDate(6, (java.sql.Date) dn);
-                System.out.println("Update Medico");
-                
-                ps.execute();
-            }
-        }
+        } 
     }
 
     @Override
     public void remover(Object o) throws Exception {
-        
-        if(o instanceof Pessoa){
+
+        if(o instanceof Medico){
+            
+            Medico m = (Medico) o; //converter o para o e que é    
+            
+            PreparedStatement ps = this.con.prepareStatement("delete from tb_medico where cpf = ?");
+            ps.setString(1, m.getCpf());            
+            ps.execute(); 
+        }else if(o instanceof Pessoa){
 
             Pessoa p = (Pessoa) o; //converter o para o e que é 
             
@@ -205,14 +212,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
             ps.setString(1, p.getCpf());            
             ps.execute();            
             
-        }else if(o instanceof Medico){
-            
-            Medico m = (Medico) o; //converter o para o e que é    
-            
-            PreparedStatement ps = this.con.prepareStatement("delete from tb_medico where cpf = ?");
-            ps.setString(1, m.getCpf());            
-            ps.execute(); 
-        } 
+        }
     }
     
     public List<Pessoa> listPessoas() throws Exception {
@@ -254,7 +254,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
         
         List<Medico> lista = null;
                         
-        PreparedStatement ps = this.con.prepareStatement("select cpf, numero_crmv from tb_medico");
+        PreparedStatement ps = this.con.prepareStatement("select cpf, numero_crmv, data_cadastro_medico from tb_medico");
         
         ResultSet rs = ps.executeQuery();//executa a query        
       
@@ -272,22 +272,5 @@ public class PersistenciaJDBC implements InterfacePersistencia {
             
         }                
         return lista;
-    }
-    
-    public Object idMedico(Class m) throws Exception{
-
-        if (m == Medico.class) {
-
-            PreparedStatement pm = this.con.prepareStatement("select cpf from tb_medico");
-            ResultSet medicoId = pm.executeQuery();
-            
-            if (medicoId.next()) {
-                String id = medicoId.getString("cpf");
-                
-                pm.close();
-                return id;
-            }
-        }
-        return null;
     }
 }
