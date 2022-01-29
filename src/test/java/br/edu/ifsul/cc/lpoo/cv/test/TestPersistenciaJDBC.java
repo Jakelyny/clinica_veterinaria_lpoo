@@ -33,10 +33,19 @@ public class TestPersistenciaJDBC {
         
         PersistenciaJDBC persistencia = new PersistenciaJDBC();
         if(persistencia.conexaoAberta()){
-            
+
             List<Pessoa> lista = persistencia.listPessoas();
+            List<Medico> listaM = persistencia.listMedicos();
+
             
-            if(!lista.isEmpty()){
+            if(!lista.isEmpty() && !listaM.isEmpty()){
+                
+                for(Medico m : listaM){
+                    System.out.println("\n---- Médico ---- \n");
+                    System.out.println("CPF: "+m.getCpf()+ " \nNumero CRMV: "+m.getNumero_crmv() + " \nData de Cadastro: "+m.getData_cadastro_medico());
+                    
+                    persistencia.remover(m);
+                }
             
                 for(Pessoa p : lista){
                     System.out.println("\n---- Pessoa ---- \n");
@@ -45,7 +54,7 @@ public class TestPersistenciaJDBC {
                     + " \nData do cadastro: "+p.getData_cadastro() + " \nData de nascimento: "+p.getData_nascimento() 
                     + " \nCep: "+p.getCep() + " \nEndereço: "+p.getEndereco() + " \nComplemento: "+p.getComplemento());
                     
-                    persistencia.remover(p);
+                    persistencia.remover(p);                               
                 }
             }else{
                 
@@ -65,7 +74,7 @@ public class TestPersistenciaJDBC {
                 p.setComplemento("Coroado");
                 
                 persistencia.persist(p); //insert na tabela.                
-                System.out.println("Cadastrou a pessoa do CPF "+p.getCpf());
+                System.out.println("Cadastrou a pessoa do CPF "+p.getCpf());             
 
                 p = new Pessoa();//reset com a nova instancia que é gerada aqui.
                 p.setCpf("058.341.539-33");
@@ -83,56 +92,24 @@ public class TestPersistenciaJDBC {
                 persistencia.persist(p); //insert na tabela.
                 System.out.println("Cadastrou a pessoa do CPF "+p.getCpf());
                 
-            }
-            
-            persistencia.fecharConexao();
-        }else{
-            System.out.println("Nao abriu a conexao com o BD via JDBC");
-        }
-    }
-    
-    @Test
-    public void testListPersistenciaMedico() throws Exception {
-        
-        PersistenciaJDBC persistencia = new PersistenciaJDBC();
-        if(persistencia.conexaoAberta()){
-            
-            List<Medico> lista = persistencia.listMedicos();
-            
-            if(!lista.isEmpty()){
-            
-                for(Medico m : lista){
-                    System.out.println("\n---- Médico ---- \n");
-                    System.out.println("CPF: "+m.getCpf()+ " \nNumero CRMV: "+m.getNumero_crmv() + " \nData de Cadastro: "+m.getData_cadastro_medico());
-                    
-                    persistencia.remover(m);
-                }
-            }else{
-                
                 System.out.println("NÃO encontrou o médico");
                 
                 Medico m = new Medico();
-                m.setCpf("091.536.910-91");
+                m.setCpf("958.519.932-78");
                 m.setNumero_crmv("1111");    
-                Calendar data_cadastro_m = Calendar.getInstance();
-                data_cadastro_m.set(2022,02,04);
-                m.setData_cadastro_medico(data_cadastro_m);
                 
                 persistencia.persist(m); //insert na tabela.                
                 System.out.println("Cadastrou o medico do CPF "+m.getCpf());
 
                 m = new Medico();//reset com a nova instancia que é gerada aqui.
-                m.setCpf("748.995.640-40");
+                m.setCpf("058.341.539-33");
                 m.setNumero_crmv("2222");    
-                Calendar data_cadastro_me = Calendar.getInstance();
-                data_cadastro_me.set(2022,05,06);
-                m.setData_cadastro_medico(data_cadastro_me);
                 
                 persistencia.persist(m); //insert na tabela.
                 System.out.println("Cadastrou o medico do CPF "+m.getCpf());
                 
             }
-            
+
             persistencia.fecharConexao();
         }else{
             System.out.println("Nao abriu a conexao com o BD via JDBC");
