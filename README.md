@@ -6,4 +6,5 @@ Para utilizar o projeto é necessário que alterações sejam feitas no arquivo 
 ```java
 <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 ```
+![image](https://user-images.githubusercontent.com/85123013/152620986-85c15554-ef4d-4e2f-b639-cae6ee80e3c0.png)
 
