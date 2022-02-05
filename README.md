@@ -22,7 +22,9 @@ As tabelas são geradas apartir de um teste executado no arquivo `PersistenciaJP
 
 ## Teste de persistência 
 
-Aqui então é onde ocorrem os testes de persistência dos dados, onde ocorre as queries de selesct, update, insert e delete por meio de uma execução do teste de persistência
+Aqui então é onde ocorrem os testes de persistência dos dados, onde ocorre as queries de selesct, update, insert e delete por meio de uma execução do teste de persistência no arquivo `TestePersistenciaJDBC.java`
+
+> O teste consiste em quando executado, caso não houver nenhum dados deve ser preenchido de imediato e caso tenha dados inseridos deve exibi-los na tela do teste e apagá-los em seguida da persistência
 
 ![image](https://user-images.githubusercontent.com/85123013/152621545-0e347e88-cb0e-4ccd-9bef-ba97e7908c22.png)
 
