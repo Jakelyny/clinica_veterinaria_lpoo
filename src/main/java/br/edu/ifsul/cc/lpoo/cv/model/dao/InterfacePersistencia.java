@@ -1,4 +1,7 @@
 package br.edu.ifsul.cc.lpoo.cv.model.dao;
+
+import br.edu.ifsul.cc.lpoo.cv.model.Pessoa;
+
 /**
  *
  * @author Jakelyny Sousa
@@ -14,4 +17,6 @@ public interface InterfacePersistencia {
     public void persist(Object o) throws Exception;//insert ou update.
     
     public void remover(Object o) throws Exception;//delete.
+    
+    public Pessoa doLogin(String nome, String senha) throws Exception;
 }
