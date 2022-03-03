@@ -40,7 +40,7 @@ public class JPanelHome extends JPanel  {
             lblMensagem.setHorizontalAlignment(SwingConstants.CENTER);
             this.add(lblMensagem, BorderLayout.NORTH);
 
-            lblImagem = new JLabel(new ImageIcon(JPanelHome.class.getResource("/images/logo_ifsul_color.png")));
+            lblImagem = new JLabel(new ImageIcon(JPanelHome.class.getResource("/images/ifsul_logo.png")));
             this.add(lblImagem, BorderLayout.CENTER);//adiciona a imagem na parte central deste painel.
 
             Calendar c = Calendar.getInstance();//recupera a data atual do computador.
