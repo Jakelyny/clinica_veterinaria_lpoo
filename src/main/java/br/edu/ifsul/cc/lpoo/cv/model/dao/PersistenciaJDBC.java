@@ -273,4 +273,28 @@ public class PersistenciaJDBC implements InterfacePersistencia {
         }                
         return lista;
     }
+    
+    @Override
+    public Pessoa doLogin(String nome, String senha) throws Exception {
+
+
+        Pessoa pessoa = null;
+
+         PreparedStatement ps = this.con.prepareStatement("select p.nome, p.senha from tb_pessoa p where p.nome= ? and j.senha = ? ");
+
+            ps.setString(1, nome);
+            ps.setString(2, senha);
+
+            ResultSet rs = ps.executeQuery();//o ponteiro do REsultSet inicialmente está na linha -1
+
+            if(rs.next()){//se a matriz (ResultSet) tem uma linha
+
+                pessoa = new Pessoa();
+                pessoa.setNome(rs.getString("nome"));                
+            }
+
+            ps.close();
+            return pessoa;        
+
+    }
 }
