@@ -22,9 +22,9 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
     private GridBagLayout gridLayout;
     private GridBagConstraints posicionador;
 
-    private JLabel  lblNickname;
+    private JLabel  lblNome;
     private JLabel lblSenha;
-    private JTextField txfNickname;
+    private JTextField txfNome;
     private JPasswordField psfSenha;
     private JButton btnLogar;
 
@@ -40,21 +40,21 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
         gridLayout = new GridBagLayout();//inicializando o gerenciador de layout
         this.setLayout(gridLayout);//definie o gerenciador para este painel.
 
-        lblNickname = new JLabel("Nickname:");
-        lblNickname.setFocusable(true);    //acessibilidade    
-        lblNickname.setToolTipText("lblNickname"); //acessibilidade
+        lblNome = new JLabel("Nome:");
+        lblNome.setFocusable(true);    //acessibilidade    
+        lblNome.setToolTipText("lblNome"); //acessibilidade
         posicionador = new GridBagConstraints();
         posicionador.gridy = 0;//policao da linha (vertical)
         posicionador.gridx = 0;// posição da coluna (horizontal)
-        this.add(lblNickname, posicionador);//o add adiciona o rotulo no painel
+        this.add(lblNome, posicionador);//o add adiciona o rotulo no painel
 
-        txfNickname = new JTextField(10);
-        txfNickname.setFocusable(true);    //acessibilidade    
-        txfNickname.setToolTipText("txfNome"); //acessibilidade
+        txfNome = new JTextField(10);
+        txfNome.setFocusable(true);    //acessibilidade    
+        txfNome.setToolTipText("txfNome"); //acessibilidade
         posicionador = new GridBagConstraints();
         posicionador.gridy = 0;//policao da linha (vertical)
         posicionador.gridx = 1;// posição da coluna (horizontal)
-        this.add(txfNickname, posicionador);//o add adiciona o rotulo no painel        
+        this.add(txfNome, posicionador);//o add adiciona o rotulo no painel        
 
         lblSenha = new JLabel("Senha:");
         lblSenha.setFocusable(true);    //acessibilidade    
@@ -89,19 +89,27 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-            //testa para verificar se o botão btnLogar foi clicado.
-            if(e.getActionCommand().equals(btnLogar.getActionCommand())){
+        //testa para verificar se o botão btnLogar foi clicado.
+        if(e.getActionCommand().equals(btnLogar.getActionCommand())){
 
-                //validacao do formulario.
-                if(txfNickname.getText().trim().length() > 4 && new String(psfSenha.getPassword()).trim().length() > 3 ){
+            //validacao do formulario.
+            if(txfNome.getText().trim().length() > 4 && new String(psfSenha.getPassword()).trim().length() > 3 ){
 
-                    controle.autenticar(txfNome.getText().trim(), new String(psfSenha.getPassword()).trim());
+                controle.autenticar(txfNome.getText().trim(), new String(psfSenha.getPassword()).trim());
 
-                }else{
+            } 
+            else if(txfNome.getText().trim().length() == 0){
+                JOptionPane.showMessageDialog(this, "Necessário inserir o nome!");
+            }
+            else if(new String(psfSenha.getPassword()).trim().length() == 0){
+                JOptionPane.showMessageDialog(this, "Necessário inserir a senha!");
 
-                    JOptionPane.showMessageDialog(this, "Informe os dados para CPF e Senha!", "Autenticação", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
 
-                }
+                JOptionPane.showMessageDialog(this, "Informações inválidas, verifique-as e tente novamente!", "Autenticação", JOptionPane.ERROR_MESSAGE);
+
+            }
 
         } 
 
