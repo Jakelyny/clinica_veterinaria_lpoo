@@ -19,7 +19,10 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
     private JMenuItem menuItemSair;
 
     private JMenu menuCadastro;
-    private JMenuItem menuItemJogador;    
+    private JMenuItem menuItemFuncionario;    
+    private JMenuItem menuItemPessoa; 
+    private JMenuItem menuItemMedico; 
+
 
     private Controle controle;
 
@@ -51,13 +54,29 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
         menuCadastro.setToolTipText("Cadastro"); //acessibilidade
         menuCadastro.setFocusable(true); //acessibilidade
 
-        menuItemJogador = new JMenuItem("Pessoa");
-        menuItemJogador.setToolTipText("Pessoa"); //acessibilidade
-        menuItemJogador.setFocusable(true); //acessibilidade
+        menuItemFuncionario = new JMenuItem("Funcionario");
+        menuItemFuncionario.setToolTipText("Funcionario"); //acessibilidade
+        menuItemFuncionario.setFocusable(true); //acessibilidade
 
-        menuItemJogador.addActionListener(this);
-        menuItemJogador.setActionCommand("menu_pessoa");
-        menuCadastro.add(menuItemJogador);   
+        menuItemFuncionario.addActionListener(this);
+        menuItemFuncionario.setActionCommand("menu_funcionario");
+        menuCadastro.add(menuItemFuncionario);   
+        
+        menuItemPessoa = new JMenuItem("Pessoa");
+        menuItemPessoa.setToolTipText("Pessoa"); //acessibilidade
+        menuItemPessoa.setFocusable(true); //acessibilidade
+
+        menuItemPessoa.addActionListener(this);
+        menuItemPessoa.setActionCommand("menu_pessoa");
+        menuCadastro.add(menuItemPessoa);  
+        
+        menuItemMedico = new JMenuItem("Medico");
+        menuItemMedico.setToolTipText("Medico"); //acessibilidade
+        menuItemMedico.setFocusable(true); //acessibilidade
+
+        menuItemMedico.addActionListener(this);
+        menuItemMedico.setActionCommand("menu_medico");
+        menuCadastro.add(menuItemMedico); 
 
         this.add(menuArquivo);
         this.add(menuCadastro);
@@ -77,13 +96,18 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
             }
 
 
-        }else if(e.getActionCommand().equals(menuItemJogador.getActionCommand())){
-
-                        //se o usuario clicou no menuitem Usuario            
-                        controle.showTela("tela_pessoa");            
+        }else if(e.getActionCommand().equals(menuItemFuncionario.getActionCommand())){
+            
+            controle.showTela("tela_funcionario"); 
+            
+        }else if(e.getActionCommand().equals(menuItemPessoa.getActionCommand())){
+            
+            controle.showTela("tela_pessoa");  
+            
+        }else if(e.getActionCommand().equals(menuItemMedico.getActionCommand())){
+            
+            controle.showTela("tela_medico");  
+            
         }
-
     }
-
-
 }
