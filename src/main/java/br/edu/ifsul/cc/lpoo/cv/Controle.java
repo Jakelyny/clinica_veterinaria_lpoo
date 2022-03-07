@@ -5,6 +5,10 @@ import br.edu.ifsul.cc.lpoo.cv.model.dao.PersistenciaJDBC;
 import br.edu.ifsul.cc.lpoo.cv.gui.JMenuBarHome;
 import br.edu.ifsul.cc.lpoo.cv.gui.JPanelHome;
 import br.edu.ifsul.cc.lpoo.cv.gui.autenticacao.JPanelAutenticacao;
+import br.edu.ifsul.cc.lpoo.cv.gui.funcionario.JPanelAFuncionario;
+import br.edu.ifsul.cc.lpoo.cv.gui.medico.JPanelAMedico;
+import br.edu.ifsul.cc.lpoo.cv.gui.pessoa.JPanelAPessoa;
+import br.edu.ifsul.cc.lpoo.cv.model.Funcionario;
 import br.edu.ifsul.cc.lpoo.cv.model.Pessoa;
 import javax.swing.JOptionPane;
 
@@ -22,6 +26,13 @@ public class Controle {
     private JPanelAutenticacao pnlAutenticacao; //painel para a autenticacao do Jogador.
 
     private JMenuBarHome menuBar; //menu principal
+    
+    private JPanelAFuncionario pnlFuncionario;
+    
+    private JPanelAPessoa pnlPessoa;
+    
+    private JPanelAMedico pnlMedico;
+
 
     private JPanelHome pnlHome; // paine de boas vindas (home)
 
@@ -37,7 +48,7 @@ public class Controle {
 
             if(conexaoJDBC!= null){
 
-                        return conexaoJDBC.conexaoAberta();
+                return conexaoJDBC.conexaoAberta();
             }
 
             return false;
@@ -59,6 +70,12 @@ public class Controle {
         frame = new JFramePrincipal();
         
         pnlAutenticacao = new JPanelAutenticacao(this);
+        
+        pnlFuncionario = new JPanelAFuncionario(this);
+        
+        pnlPessoa = new JPanelAPessoa(this);
+        
+        pnlMedico = new JPanelAMedico(this);
 
         menuBar = new JMenuBarHome(this);
 
@@ -66,6 +83,9 @@ public class Controle {
 
         frame.addTela(pnlAutenticacao, "tela_autenticacao");//carta 1
         frame.addTela(pnlHome, "tela_home");//carta 2
+        frame.addTela(pnlFuncionario, "tela_funcionario");
+        frame.addTela(pnlPessoa, "tela_pessoa");
+        frame.addTela(pnlPessoa, "tela_medico");
 
         frame.showTela("tela_autenticacao"); // apreseta a carta cujo nome é "tela_autenticacao"
 
@@ -78,10 +98,11 @@ public class Controle {
         try{
 
             Pessoa p =  conexaoJDBC.doLogin(cpf, senha);
+            Funcionario f = new Funcionario();
 
             if(p != null){
 
-                JOptionPane.showMessageDialog(pnlAutenticacao, "O usuário "+p.getNome()+" foi autenticado com sucesso!", "Autenticação", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(pnlAutenticacao, "O usuário "+p.getCpf()+" foi autenticado com sucesso!", "Autenticação", JOptionPane.INFORMATION_MESSAGE);
 
                 frame.setJMenuBar(menuBar);//adiciona o menu de barra no frame
                 frame.showTela("tela_home");//muda a tela para o painel de boas vindas (home)
@@ -94,6 +115,7 @@ public class Controle {
         }catch(Exception e){
 
             JOptionPane.showMessageDialog(pnlAutenticacao, "Erro ao executar a autenticação no Banco de Dados!", "Autenticação", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
 
     }
@@ -102,6 +124,10 @@ public class Controle {
 
 
         frame.showTela(nomeTela);
+    }
+    
+    public PersistenciaJDBC getConexaoJDBC() {
+        return conexaoJDBC;
     }
 }
 
