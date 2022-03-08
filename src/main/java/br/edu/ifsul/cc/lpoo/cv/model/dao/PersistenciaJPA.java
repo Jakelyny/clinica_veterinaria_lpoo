@@ -1,5 +1,7 @@
 package br.edu.ifsul.cc.lpoo.cv.model.dao;
 
+import br.edu.ifsul.cc.lpoo.cv.model.Pessoa;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -56,5 +58,17 @@ public class PersistenciaJPA implements InterfacePersistencia{
         entity.remove(o); //realiza o delete
         entity.getTransaction().commit(); //comita a transacao (comando sql)
         
+    }
+    
+    @Override
+    public Pessoa doLogin(String cpf, String senha) throws Exception {
+
+        List<Pessoa> list = entity.createNamedQuery("Pessoa.login").setParameter("paramN", cpf).setParameter("paramS", senha).getResultList();
+        if(list.isEmpty()){
+            return null;
+        }else{
+            return list.get(0);
+        }
+
     }
 }
