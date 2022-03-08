@@ -55,5 +55,12 @@ public class Medico extends Pessoa{
     public void setData_cadastro_medico(Calendar data_cadastro_medico) {
         this.data_cadastro_medico = data_cadastro_medico;
     }
+
+    @Override
+    public String toString() {
+        return getCpf();
+    }
+    
+    
     
 }
