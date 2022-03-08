@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
@@ -18,6 +20,12 @@ import javax.persistence.TemporalType;
 @Table(name = "tb_pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo")
+
+@NamedQueries({      
+    @NamedQuery(name="Pessoa.login",
+               query="SELECT p From Pessoa p where p.nome = :paramN and p.senha = :paramS")
+})
+
 public class Pessoa implements Serializable{
     
     @Id
@@ -223,5 +231,12 @@ public class Pessoa implements Serializable{
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return getCpf();
+    }
+    
+    
     
 }

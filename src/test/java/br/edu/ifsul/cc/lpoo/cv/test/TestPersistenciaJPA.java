@@ -32,12 +32,12 @@ public class TestPersistenciaJPA {
         if(persistencia.conexaoAberta()){
             System.out.println("abriu a conexao com o BD via JPA");
 
-            Pessoa p = persistencia.doLogin("teste@", "1234");
+            Pessoa p = persistencia.doLogin("123456789", "12345");
 
             if(p == null){
                 p = new Pessoa();
-                p.setNome("teste@");
-                p.setSenha("1234");
+                p.setCpf("123456789");
+                p.setSenha("12345");
 
                 persistencia.persist(p);
                 System.out.println("Cadastrou nova pessoa!");

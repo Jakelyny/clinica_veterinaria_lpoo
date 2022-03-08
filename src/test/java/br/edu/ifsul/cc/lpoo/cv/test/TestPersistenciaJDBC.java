@@ -1,5 +1,7 @@
 package br.edu.ifsul.cc.lpoo.cv.test;
 
+import br.edu.ifsul.cc.lpoo.cv.model.Cargo;
+import br.edu.ifsul.cc.lpoo.cv.model.Funcionario;
 import br.edu.ifsul.cc.lpoo.cv.model.Medico;
 import br.edu.ifsul.cc.lpoo.cv.model.Pessoa;
 import br.edu.ifsul.cc.lpoo.cv.model.dao.PersistenciaJDBC;
@@ -28,7 +30,7 @@ public class TestPersistenciaJDBC {
 
     }
     
-    @Test
+    //@Test inativo
     public void testListPersistenciaPessoa() throws Exception {
         
         PersistenciaJDBC persistencia = new PersistenciaJDBC();
@@ -115,4 +117,55 @@ public class TestPersistenciaJDBC {
             System.out.println("Nao abriu a conexao com o BD via JDBC");
         }
     }
+    
+    @Test //Insert dos dados das tabelas funcionário e médico
+    public void testInsertFuncionario() throws Exception {
+        
+        PersistenciaJDBC persistencia = new PersistenciaJDBC();
+        if(persistencia.conexaoAberta()){
+
+            System.out.println("NÃO encontrou o funcionário");
+
+            Funcionario f = new Funcionario();
+            f.setCpf("958.519.932-78");
+            f.setTipo("F");
+            f.setRg("37.269.510-3");   
+            f.setNome("José Ian Sales"); 
+            f.setSenha("YGBoI6ON4J"); 
+            f.setNumero_celular("(96) 2609-3551"); 
+            f.setEmail("jose.ian.sales@suplementototal.com.br");               
+            f.setData_nascimento(Calendar.getInstance());
+            f.setCep("68909-035"); 
+            f.setEndereco("Avenida Antônio Carlos Reis, 586 Macapá AP");
+            f.setComplemento("Macapá");
+            f.setNumero_ctps("5284292");
+            f.setNumero_pis("41122892");
+            f.setCargo(Cargo.AUXILIAR_VETERINARIO);
+
+            persistencia.persist(f); //insert na tabela de funcionário.      
+            
+            System.out.println("NÃO encontrou o médico");
+                
+            Medico m = new Medico();
+            m.setCpf("655.628.813-65");
+            m.setTipo("M");
+            m.setRg("16.652.791-9");   
+            m.setNome("Débora Daniela Vieira"); 
+            m.setSenha("4w9ijeMHBy"); 
+            m.setNumero_celular("(27) 2633-4800"); 
+            m.setEmail("debora_vieira@habby-appe.com.br");               
+            m.setData_nascimento(Calendar.getInstance());
+            m.setCep("29302-413"); 
+            m.setEndereco("Rua Santa Maria, 134 Nova Brasília ES");
+            m.setComplemento("Cachoeiro de Itapemirim");
+            m.setNumero_crmv("27988726");
+
+            persistencia.persist(m); //insert na tabela de médico.
+            
+            persistencia.fecharConexao();
+        }else{
+            System.out.println("Nao abriu a conexao com o BD via JDBC");
+        }
+    }
+    
 }
