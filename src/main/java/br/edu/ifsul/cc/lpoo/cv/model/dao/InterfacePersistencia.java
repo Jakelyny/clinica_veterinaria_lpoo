@@ -18,5 +18,5 @@ public interface InterfacePersistencia {
     
     public void remover(Object o) throws Exception;//delete.
     
-    public Pessoa doLogin(String nome, String senha) throws Exception;
+    public Pessoa doLogin(String cpf, String senha) throws Exception;
 }
