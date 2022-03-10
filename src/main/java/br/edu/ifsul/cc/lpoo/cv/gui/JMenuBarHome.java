@@ -20,7 +20,6 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
 
     private JMenu menuCadastro;
     private JMenuItem menuItemFuncionario;    
-    private JMenuItem menuItemPessoa; 
     private JMenuItem menuItemMedico; 
 
 
@@ -62,14 +61,6 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
         menuItemFuncionario.setActionCommand("menu_funcionario");
         menuCadastro.add(menuItemFuncionario);   
         
-        menuItemPessoa = new JMenuItem("Pessoa");
-        menuItemPessoa.setToolTipText("Pessoa"); //acessibilidade
-        menuItemPessoa.setFocusable(true); //acessibilidade
-
-        menuItemPessoa.addActionListener(this);
-        menuItemPessoa.setActionCommand("menu_pessoa");
-        menuCadastro.add(menuItemPessoa);  
-        
         menuItemMedico = new JMenuItem("Medico");
         menuItemMedico.setToolTipText("Medico"); //acessibilidade
         menuItemMedico.setFocusable(true); //acessibilidade
@@ -99,10 +90,6 @@ public class JMenuBarHome extends JMenuBar implements ActionListener {
         }else if(e.getActionCommand().equals(menuItemFuncionario.getActionCommand())){
             
             controle.showTela("tela_funcionario"); 
-            
-        }else if(e.getActionCommand().equals(menuItemPessoa.getActionCommand())){
-            
-            controle.showTela("tela_pessoa");  
             
         }else if(e.getActionCommand().equals(menuItemMedico.getActionCommand())){
             
