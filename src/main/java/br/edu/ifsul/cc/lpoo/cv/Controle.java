@@ -7,8 +7,6 @@ import br.edu.ifsul.cc.lpoo.cv.gui.JPanelHome;
 import br.edu.ifsul.cc.lpoo.cv.gui.autenticacao.JPanelAutenticacao;
 import br.edu.ifsul.cc.lpoo.cv.gui.funcionario.JPanelAFuncionario;
 import br.edu.ifsul.cc.lpoo.cv.gui.medico.JPanelAMedico;
-import br.edu.ifsul.cc.lpoo.cv.gui.pessoa.JPanelAPessoa;
-import br.edu.ifsul.cc.lpoo.cv.model.Funcionario;
 import br.edu.ifsul.cc.lpoo.cv.model.Pessoa;
 import javax.swing.JOptionPane;
 
@@ -28,9 +26,7 @@ public class Controle {
     private JMenuBarHome menuBar; //menu principal
     
     private JPanelAFuncionario pnlFuncionario;
-    
-    private JPanelAPessoa pnlPessoa;
-    
+        
     private JPanelAMedico pnlMedico;
 
 
@@ -72,9 +68,7 @@ public class Controle {
         pnlAutenticacao = new JPanelAutenticacao(this);
         
         pnlFuncionario = new JPanelAFuncionario(this);
-        
-        pnlPessoa = new JPanelAPessoa(this);
-        
+                
         pnlMedico = new JPanelAMedico(this);
 
         menuBar = new JMenuBarHome(this);
@@ -84,8 +78,7 @@ public class Controle {
         frame.addTela(pnlAutenticacao, "tela_autenticacao");//carta 1
         frame.addTela(pnlHome, "tela_home");//carta 2
         frame.addTela(pnlFuncionario, "tela_funcionario");
-        frame.addTela(pnlPessoa, "tela_pessoa");
-        frame.addTela(pnlPessoa, "tela_medico");
+        frame.addTela(pnlMedico, "tela_medico");
 
         frame.showTela("tela_autenticacao"); // apreseta a carta cujo nome é "tela_autenticacao"
 
@@ -98,7 +91,6 @@ public class Controle {
         try{
 
             Pessoa p =  conexaoJDBC.doLogin(cpf, senha);
-            Funcionario f = new Funcionario();
 
             if(p != null){
 
