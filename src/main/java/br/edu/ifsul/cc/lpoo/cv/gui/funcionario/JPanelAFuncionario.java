@@ -33,11 +33,13 @@ public class JPanelAFuncionario extends JPanel {
         
         this.add(getFormulario(), "tela_funcionario_formulario");
         this.add(listagem, "tela_funcionario_listagem");
-                
+        listagem.populaTable();
+        cardLayout.show(this, "tela_funcionario_listagem");
+
     }
     
     public void showTela(String nomeTela){
-        
+        System.out.println(nomeTela);
         if(nomeTela.equals("tela_funcionario_listagem")){
             
             listagem.populaTable();
