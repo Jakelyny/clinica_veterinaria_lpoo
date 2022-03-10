@@ -63,10 +63,10 @@ public class JPanelAFuncionarioListagem extends JPanel implements ActionListener
 
             List<Funcionario> listFuncionarios = controle.getConexaoJDBC().listFuncionarios();
             for(Funcionario f : listFuncionarios){
-                if(txfFiltro.equals("")){
-                    model.addRow(new Object[]{f, format.format(f.getData_cadastro().getTime()), f.getNumero_ctps(), f.getNome(), f.getNumero_pis()});
-                }else if(txfFiltro.equals(f.getCpf())){
-                    model.addRow(new Object[]{f, format.format(f.getData_cadastro().getTime()), f.getNumero_ctps(), f.getNome(), f.getNumero_pis()});
+                if(txfFiltro.getText().equals("")){
+                    model.addRow(new Object[]{f, f.getNome(), f.getCargo(), format.format(f.getData_cadastro().getTime()), f.getNumero_ctps(), f.getNumero_pis()});
+                }else if(txfFiltro.getText().equals(f.getCpf())){
+                    model.addRow(new Object[]{f, f.getNome(), f.getCargo(), format.format(f.getData_cadastro().getTime()), f.getNumero_ctps(), f.getNumero_pis()});
                 }
             }
 
@@ -110,8 +110,12 @@ public class JPanelAFuncionarioListagem extends JPanel implements ActionListener
         
         modeloTabela = new DefaultTableModel(
             new String [] {
-                "CPF", "Data Cadastro", "Número CTPS", "Nome", "Número PIS"
-            }, 0);
+                "CPF", "Funcionário", "Cargo","Data de Cadastro", "Número CTPS", "Número PIS"
+            }, 0){
+            public boolean isCellEditable(int linha, int coluna) {
+                return false;
+            }
+        };
         
         tblListagem.setModel(modeloTabela);
         scpListagem.setViewportView(tblListagem);
