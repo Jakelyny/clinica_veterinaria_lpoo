@@ -36,7 +36,7 @@ public class JPanelHome extends JPanel  {
             layoutGeo = new BorderLayout();
             this.setLayout(layoutGeo);//seta o gerenciador de layout para este painel.
 
-            lblMensagem = new JLabel("Tela de Boas Vindas ao Sisteminha!");
+            lblMensagem = new JLabel("Bem vindo(a)!");
             lblMensagem.setHorizontalAlignment(SwingConstants.CENTER);
             this.add(lblMensagem, BorderLayout.NORTH);
 
