@@ -11,8 +11,8 @@ import org.junit.Test;
  */
 public class TestPersistenciaJPA {
     
-    @Test
-    public void testConexaoGeracaoTabelas(){
+    @Test //execução para recriar tabelas
+    public void testConexaoGeracaoTabelas(){ 
         
         PersistenciaJPA persistencia = new PersistenciaJPA();
         if(persistencia.conexaoAberta()){
@@ -24,8 +24,8 @@ public class TestPersistenciaJPA {
             System.out.println("Nao abriu a conexao com o BD via JPA");
         }
     }
-    
-     @Test
+    //insert dos funcionários e médicos estão em JDBC
+    // @Test
     public void testGeracaoPessoaLogin() throws Exception {
 
         PersistenciaJPA persistencia = new PersistenciaJPA();
