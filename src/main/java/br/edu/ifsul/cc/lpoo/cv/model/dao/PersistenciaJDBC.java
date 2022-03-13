@@ -145,7 +145,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
 
                 ps.executeUpdate();
                 System.out.println("Iniciando Insert de Médico...");
-                ps = this.con.prepareStatement("insert into tb_medico (data_cadastro_medico, cpf, numero_crmv) values (now(),?,?)");
+                ps = this.con.prepareStatement("insert into tb_medico (cpf, numero_crmv) values (?,?)");
                 ps.setString(1, m.getCpf());
                 ps.setString(2, m.getNumero_crmv());
                 System.out.println("Insert Medico");
@@ -171,14 +171,12 @@ public class PersistenciaJDBC implements InterfacePersistencia {
                 ps.setString(11, m.getCpf());
                 ps.execute();
 
-                System.out.println("Iniciando Update de Funcionario...");
+                System.out.println("Iniciando Update de Medico...");
                         ps = this.con.prepareStatement("update tb_medico set "
-                        + "cpf = ? numero_crmv = ? where data_cadastro_medico = ?");
+                        + "cpf = ?, numero_crmv = ? where cpf = ?");
                 ps.setString(1, m.getCpf());
                 ps.setString(2, m.getNumero_crmv());
-                Date dn = new Date(System.currentTimeMillis());
-                dn.setTime(m.getData_cadastro_medico().getTimeInMillis());
-                ps.setDate(3, (java.sql.Date) dn);
+                ps.setString(3,  m.getCpf());
                 System.out.println("Update Medico");
                 ps.execute();
             }
@@ -374,7 +372,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
         
         List<Medico> lista = null;
                         
-        PreparedStatement ps = this.con.prepareStatement("select cpf, numero_crmv, data_cadastro_medico from tb_medico");
+        PreparedStatement ps = this.con.prepareStatement("select cpf, numero_crmv from tb_medico");
         
         ResultSet rs = ps.executeQuery();//executa a query        
       
@@ -384,9 +382,6 @@ public class PersistenciaJDBC implements InterfacePersistencia {
             Medico m = new Medico();
             m.setCpf(rs.getString("cpf"));
             m.setNumero_crmv(rs.getString("numero_crmv"));
-            Calendar dcm = Calendar.getInstance();
-            dcm.setTimeInMillis(rs.getDate("data_cadastro_medico").getTime());
-            m.setData_cadastro_medico(dcm);
             
             PreparedStatement psP = this.con.prepareStatement("select rg, nome, senha, numero_celular, email, "
                     + "data_cadastro, data_nascimento, cep, endereco, complemento from tb_pessoa where cpf = ?");
