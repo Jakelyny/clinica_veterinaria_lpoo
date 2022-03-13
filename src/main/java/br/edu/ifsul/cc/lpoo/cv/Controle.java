@@ -81,7 +81,7 @@ public class Controle {
         frame.addTela(pnlMedico, "tela_medico");
 
         frame.showTela("tela_autenticacao"); // apreseta a carta cujo nome é "tela_autenticacao"
-
+        
         frame.setVisible(true); // torna visível o jframe
 
     }
