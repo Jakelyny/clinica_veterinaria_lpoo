@@ -118,6 +118,8 @@ public class TestPersistenciaJDBC {
         }
     }
     
+    
+    
     @Test //Insert dos dados das tabelas funcionário e médico
     public void testInsertFuncionario() throws Exception {
         
