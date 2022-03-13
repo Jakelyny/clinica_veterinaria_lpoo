@@ -44,7 +44,7 @@ public class TestPersistenciaJDBC {
                 
                 for(Medico m : listaM){
                     System.out.println("\n---- Médico ---- \n");
-                    System.out.println("CPF: "+m.getCpf()+ " \nNumero CRMV: "+m.getNumero_crmv() + " \nData de Cadastro: "+m.getData_cadastro_medico());
+                   // System.out.println("CPF: "+m.getCpf()+ " \nNumero CRMV: "+m.getNumero_crmv() + " \nData de Cadastro: "+m.getData_cadastro_medico());
                     
                     persistencia.remover(m);
                 }
