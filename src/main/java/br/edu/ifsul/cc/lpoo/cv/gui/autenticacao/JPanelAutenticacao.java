@@ -99,7 +99,7 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
 
             } 
             else if(txfCpf.getText().trim().length() == 0){
-                JOptionPane.showMessageDialog(this, "Necessário inserir o nome!");
+                JOptionPane.showMessageDialog(this, "Necessário inserir o CPF!");
             }
             else if(new String(psfSenha.getPassword()).trim().length() == 0){
                 JOptionPane.showMessageDialog(this, "Necessário inserir a senha!");
