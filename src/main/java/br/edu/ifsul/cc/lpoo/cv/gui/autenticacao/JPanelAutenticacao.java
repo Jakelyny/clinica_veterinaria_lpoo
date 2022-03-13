@@ -50,7 +50,7 @@ public class JPanelAutenticacao extends JPanel implements ActionListener {
 
         txfCpf = new JTextField(10);
         txfCpf.setFocusable(true);    //acessibilidade    
-        txfCpf.setToolTipText("txfNome"); //acessibilidade
+        txfCpf.setToolTipText("txfCpf"); //acessibilidade
         posicionador = new GridBagConstraints();
         posicionador.gridy = 0;//policao da linha (vertical)
         posicionador.gridx = 1;// posição da coluna (horizontal)
